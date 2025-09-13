@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Generator</title>
+</head>
+<body>
+    <canvas id="canvas" width="32" height="32" style="border: 1px solid black;"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Clear canvas
+        ctx.clearRect(0, 0, 32, 32);
+        
+        // Create gradient for background
+        const gradient = ctx.createLinearGradient(0, 0, 32, 32);
+        gradient.addColorStop(0, '#4A90E2');
+        gradient.addColorStop(1, '#357ABD');
+        
+        // Draw circle background
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(16, 16, 15, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // Draw border
+        ctx.strokeStyle = '#2C5AA0';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        
+        // Draw globe lines in white
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.lineWidth = 1.5;
+        
+        // Vertical center line
+        ctx.beginPath();
+        ctx.moveTo(16, 2);
+        ctx.lineTo(16, 30);
+        ctx.stroke();
+        
+        // Horizontal center line
+        ctx.beginPath();
+        ctx.moveTo(2, 16);
+        ctx.lineTo(30, 16);
+        ctx.stroke();
+        
+        // Draw curved lines
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.lineWidth = 1;
+        
+        // Longitude curves
+        ctx.beginPath();
+        ctx.ellipse(16, 16, 12, 14, 0, 0, Math.PI);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.ellipse(16, 16, 12, 14, 0, Math.PI, 2 * Math.PI);
+        ctx.stroke();
+        
+        // Latitude curves
+        ctx.beginPath();
+        ctx.ellipse(16, 16, 13, 4, 0, 0, 2 * Math.PI);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.ellipse(16, 16, 13, 8, 0, 0, 2 * Math.PI);
+        ctx.stroke();
+        
+        // Convert to data URL and log it
+        const dataURL = canvas.toDataURL('image/png');
+        console.log('Favicon PNG data URL:', dataURL);
+    </script>
+</body>
+</html>
